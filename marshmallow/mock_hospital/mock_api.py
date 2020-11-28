@@ -1,44 +1,10 @@
-from json import encoder
-from flask import Flask, request, Response
-import random
+from flask import Flask, request
 from gevent.pywsgi import WSGIServer
 import json
-from typing import List, Union
+from marshmallow.mock_hospital.mock_class import Doctor, Hospital
 
 
-class Doctor:
-    def __init__(self, name: str, department: str, professional_title: str, intro: str, expert_in: str):
-        self.name = name
-        self.department = department
-        self.professional_title = professional_title
-        self.intro = intro
-        self.expert_in = expert_in
-
-    def __init__(self, doctor: Union[dict, tuple]):
-        if type(doctor) == dict:
-            self.name = doctor["name"]
-            self.department = doctor["department"]
-            self.professional_title = doctor["professional_title"]
-            self.intro = doctor["intro"]
-            self.expert_in = doctor["expert_in"]
-        elif type(doctor) == tuple:
-            self.name = doctor[0]
-            self.department = doctor[1]
-            self.professional_title = doctor[2]
-            self.intro = doctor[3]
-            self.expert_in = doctor[4]
-        else:
-            raise Exception
-
-
-class Hospital:
-    def __init__(self, hospital_name: str, hospital_region: str, doctor_list_dict_str: List[str]):
-        self.hospital_name = hospital_name
-        self.hospital_region = hospital_region
-        self.doctor_list_dict_str = doctor_list_dict_str
-
-
-with open("./assets/hospital_api.json", encoding='utf8') as mock_hospital_json_str:
+with open("./marshmallow/mock_hospital/assets/hospital_api.json", encoding='utf8') as mock_hospital_json_str:
     mock_hospital_data = json.loads(mock_hospital_json_str.read())
     docker_list_dict = []
     mock_hospital_data: dict
@@ -70,10 +36,15 @@ def get_hospital():
     return json.dumps(hospital_all.__dict__)
 
 
+@app.route('/exit', methods=['GET'])
+def to_exit():
+    exit()
+
+
 def main():
     port_num = 15000
     main_server = WSGIServer(('0.0.0.0', port_num), app)
-    print("Will serve at {}".format(port_num))
+    print("Mock Source: API\nThe service will serve at {}\n".format(port_num))
     main_server.serve_forever()
 
 

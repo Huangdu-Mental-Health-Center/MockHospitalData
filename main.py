@@ -1,15 +1,12 @@
-from numpy.lib.function_base import append
-from requests import api
 import marshmallow.mock_hospital.mock_db as mock_db
 import marshmallow.mock_hospital.mock_xlsx as mock_xlsx
+import marshmallow.mock_hospital.mock_api as mock_api
 import requests
 import json
-from json import encoder
-from flask import Flask, request, Response
-import random
+from flask import Flask, request
 from gevent.pywsgi import WSGIServer
 import json
-from typing import List, Union
+from threading import Thread
 
 app = Flask(__name__)
 
@@ -53,17 +50,19 @@ def get_doctor_list():
     return result
 
 
-@app.route('/get_all', methods=['GET'])
-def get_hospital():
-    return "234"
+@app.route('/exit', methods=['GET'])
+def to_exit():
+    exit()
 
 
 def main():
     port_num = 14000
     main_server = WSGIServer(('0.0.0.0', port_num), app)
-    print("Will serve at {}".format(port_num))
+    print("Mock Data:\nThis service will serve at {}\n".format(port_num))
     main_server.serve_forever()
 
 
 if __name__ == '__main__':
+    t = Thread(target=mock_api.main)
+    t.start()
     main()
