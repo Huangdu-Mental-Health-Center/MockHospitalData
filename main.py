@@ -10,12 +10,6 @@ from threading import Thread
 
 app = Flask(__name__)
 
-response_template = {
-    "data": [],
-    "count": -1,
-    "success": False,
-}
-
 
 def after_request(resp):
     resp.headers['Access-Control-Allow-Origin'] = '*'
@@ -28,7 +22,11 @@ with open("./marshmallow/mock_hospital/assets/hospitals.json", encoding='utf8') 
 
 @app.route('/query', methods=['GET'])
 def get_doctor_list_by_name():
-    response = response_template
+    response = {
+        "data": [],
+        "count": -1,
+        "success": False,
+    }
     try:
         doctor_name = request.args.get('doctor_name')
         result_list = []
@@ -61,12 +59,16 @@ def get_doctor_list_by_name():
 
 @app.route('/query_hospital', methods=['GET'])
 def get_hospital_list_by_name():
-    response = response_template
+    response = {
+        "data": [],
+        "count": -1,
+        "success": False,
+    }
     try:
         hospital_name = request.args.get('hospital_name')
         for hospital in mock_hospital_list["hospital_list"]:
-            this_hospital_name: str 
-            this_hospital_name =  hospital["hosName"]
+            this_hospital_name: str
+            this_hospital_name = hospital["hosName"]
             if this_hospital_name.find(hospital_name) != -1:
                 response["data"].append(hospital)
         response["count"] = len(response["data"])
