@@ -34,12 +34,20 @@
 
 ```
 
-## 返回数据格式
+## 按照姓名查询医生
+
+### 参数
+
+
+
+### 返回数据格式
 
 可以概括为
 
 ```json
 {
+    "count": **,
+    "success": *******,
     "data":[                                            // 按医院分组
         {
             "doctor_list_dict_str": [                   // 医院下医生信息数组
@@ -66,6 +74,8 @@
 
 ```json
 {
+    "count": 2,
+    "success": true,
     "data": [
         {
             "doctor_list_dict_str": [
@@ -101,6 +111,8 @@
 
 ```json
 {
+    "count": 2,
+    "success": true,
     "data": [
         {
             "doctor_list_dict_str": [
@@ -123,5 +135,34 @@
             "hospital_region": "上海"
         }
     ]
+}
+```
+
+## 按照名字模糊查询医院
+
+### 载点
+
+`/query_hospital`
+
+### 参数
+
+* `hospital_name`: 医院名字
+
+### 返回样例
+
+```json
+{
+    "count": 1,
+    "data": [
+        {
+            "hosIntro": "医院 B，是中华人民共和国一家跨国企业控股医院，也是中国大陆规模最大的互联网医院。",
+            "hosName": "医院 B",
+            "hosPic": "https://static.leiphone.com/uploads/new/article/740_740/201708/598fc025a6ccf.jpg",
+            "hosType": "二级乙等",
+            "position": "上海市田林路 397 号腾云大厦",
+            "telephone": "86-21-54569512"
+        }
+    ],
+    "success": true
 }
 ```
