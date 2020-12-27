@@ -24,7 +24,9 @@ def get_doctor_list():
     doctor_name = request.args.get('doctor_name')
     return_dict_list = []
     for doctor in mock_hospital_data["data"]:
-        if doctor["name"] == doctor_name:
+        this_doctor_name: str
+        this_doctor_name = doctor["name"]
+        if this_doctor_name.find(doctor_name) != -1:
             return_dict_list.append(Doctor(doctor).__dict__)
     hospital = Hospital(mock_hospital_data["hospital_name"],
                         mock_hospital_data["hospital_region"], return_dict_list)
