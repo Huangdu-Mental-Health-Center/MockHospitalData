@@ -27,7 +27,7 @@ def get_doctor_list_by_name():
         "count": -1,
         "success": False,
     }
-    try:
+    if True:
         doctor_name = request.args.get('doctor_name')
         result_list = []
         xlsx_dict = mock_xlsx.query(doctor_name).__dict__
@@ -47,13 +47,7 @@ def get_doctor_list_by_name():
                 response["data"].append(i)
         response["count"] = len(response["data"])
         response["success"] = True
-    except Exception as e:
-        print(e.with_traceback)
-        response = {
-            "data": [],
-            "count": -1,
-            "success": False,
-        }
+    
     return response
 
 

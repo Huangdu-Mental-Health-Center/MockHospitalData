@@ -8,13 +8,13 @@ xlsx_name = hospital_name + "_" + hospital_region + ".xlsx"
 
 df = pd.read_excel("./marshmallow/mock_hospital/assets/" + xlsx_name)
 df_all = df.to_dict('records')
-docker_list_dict = []
+doctor_list_dict = []
 for doctor_tuple in df_all:
-    docker_list_dict.append(Doctor(doctor_tuple).__dict__)
+    doctor_list_dict.append(Doctor(doctor_tuple).__dict__)
 hospital_all = Hospital(
     hospital_name,
     hospital_region,
-    docker_list_dict)
+    doctor_list_dict)
 
 
 def get_all() -> Hospital:
@@ -22,12 +22,12 @@ def get_all() -> Hospital:
 
 
 def query(doctor_name: str) -> Hospital:
-    df_searched = df.loc[df['name'].find(doctor_name) != -1].to_dict('records')
-    docker_list_dict = []
+    df_searched = df.loc[df['name'].isin].to_dict('records')
+    doctor_list_dict = []
     for doctor_tuple in df_searched:
-        docker_list_dict.append(Doctor(doctor_tuple).__dict__)
+        doctor_list_dict.append(Doctor(doctor_tuple).__dict__)
     hospital = Hospital(
         hospital_name,
         hospital_region,
-        docker_list_dict)
+        doctor_list_dict)
     return hospital

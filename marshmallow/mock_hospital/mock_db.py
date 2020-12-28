@@ -10,13 +10,13 @@ c = conn.cursor()
 c.execute('SELECT * FROM doctor')
 result = c.fetchall()
 conn.close()
-docker_list_dict = []
+doctor_list_dict = []
 for doctor_tuple in result:
-    docker_list_dict.append(Doctor(doctor_tuple).__dict__)
+    doctor_list_dict.append(Doctor(doctor_tuple).__dict__)
 hospital_all = Hospital(
     hospital_name,
     hospital_region,
-    docker_list_dict)
+    doctor_list_dict)
 
 
 def query(doctor_name: str) -> Hospital:
@@ -26,13 +26,13 @@ def query(doctor_name: str) -> Hospital:
     c.execute('SELECT * FROM doctor WHERE name like ?', "%" + query + "%")
     result = c.fetchall()
     conn.close()
-    docker_list_dict = []
+    doctor_list_dict = []
     for doctor_tuple in result:
-        docker_list_dict.append(Doctor(doctor_tuple).__dict__)
+        doctor_list_dict.append(Doctor(doctor_tuple).__dict__)
     hospital = Hospital(
         hospital_name,
         hospital_region,
-        docker_list_dict)
+        doctor_list_dict)
     return hospital
 
 
