@@ -45,7 +45,10 @@ def get_doctor_list_by_name():
         for i in result_list:
             if len(i["doctor_list_dict_str"]) != 0:
                 response["data"].append(i)
-        response["count"] = len(response["data"])
+        temp_count = 0
+        for i in response["data"]:
+            temp_count += len(i["doctor_list_dict_str"])
+        response["count"] = temp_count
         response["success"] = True
     
     return response

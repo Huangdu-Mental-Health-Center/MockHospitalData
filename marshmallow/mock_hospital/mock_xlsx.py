@@ -22,12 +22,13 @@ def get_all() -> Hospital:
 
 
 def query(doctor_name: str) -> Hospital:
-    df_searched = df.loc[df['name'].isin].to_dict('records')
-    doctor_list_dict = []
-    for doctor_tuple in df_searched:
-        doctor_list_dict.append(Doctor(doctor_tuple).__dict__)
+    temp_doctor_list_dict = []
+    doctor: Doctor
+    for doctor in doctor_list_dict:
+        if doctor["name"].find(doctor_name) != -1:
+            temp_doctor_list_dict.append(doctor)
     hospital = Hospital(
         hospital_name,
         hospital_region,
-        doctor_list_dict)
+        temp_doctor_list_dict)
     return hospital
