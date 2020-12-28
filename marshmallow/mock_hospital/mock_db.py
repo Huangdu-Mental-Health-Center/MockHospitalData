@@ -23,7 +23,7 @@ def query(doctor_name: str) -> Hospital:
     conn = sqlite3.connect("./marshmallow/mock_hospital/assets/" + db_name)
     c = conn.cursor()
     query = (doctor_name,)
-    c.execute('SELECT * FROM doctor WHERE name=?', query)
+    c.execute('SELECT * FROM doctor WHERE name like ?', "%" + query + "%")
     result = c.fetchall()
     conn.close()
     docker_list_dict = []
