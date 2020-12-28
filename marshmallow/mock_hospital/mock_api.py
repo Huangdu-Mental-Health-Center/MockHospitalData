@@ -6,15 +6,15 @@ from marshmallow.mock_hospital.mock_class import Doctor, Hospital
 
 with open("./marshmallow/mock_hospital/assets/hospital_api.json", encoding='utf8') as mock_hospital_json_str:
     mock_hospital_data = json.loads(mock_hospital_json_str.read())
-    docker_list_dict = []
+    doctor_list_dict = []
     mock_hospital_data: dict
     doctor: dict
     for doctor in mock_hospital_data["data"]:
-        docker_list_dict.append(Doctor(doctor).__dict__)
+        doctor_list_dict.append(Doctor(doctor).__dict__)
     hospital_all = Hospital(
         mock_hospital_data["hospital_name"],
         mock_hospital_data["hospital_region"],
-        docker_list_dict)
+        doctor_list_dict)
 
 app = Flask(__name__)
 
