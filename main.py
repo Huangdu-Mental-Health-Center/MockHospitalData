@@ -49,7 +49,7 @@ def get_doctor_list_by_name():
         response["success"] = True
     except Exception as e:
         print(e.with_traceback)
-        result = {
+        response = {
             "data": [],
             "count": -1,
             "success": False,
@@ -75,7 +75,7 @@ def get_hospital_list_by_name():
         response["success"] = True
     except Exception as e:
         print(e.with_traceback)
-        result = {
+        response = {
             "data": [],
             "count": -1,
             "success": False,
