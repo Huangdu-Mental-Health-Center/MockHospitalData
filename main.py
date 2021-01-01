@@ -20,6 +20,8 @@ def after_request(resp):
 with open("./marshmallow/mock_hospital/assets/hospitals.json", encoding='utf8') as hospital_list_json:
     mock_hospital_list = json.loads(hospital_list_json.read())
 
+with open("./marshmallow/mock_hospital/assets/hospital_departments.json", encoding='utf8') as hospital_department_list_json:
+    mock_hospital_department_list = json.loads(hospital_department_list_json.read())
 
 @app.route('/query', methods=['GET'])
 def get_doctor_list_by_name():
@@ -88,6 +90,57 @@ def get_hospital_list_by_name():
         list_to_append = []
         hospital_name = request.args.get('hospital_name')
         for hospital in mock_hospital_list["hospital_list"]:
+            this_hospital_name: str
+            this_hospital_name = hospital["hosName"]
+            if this_hospital_name.find(hospital_name) != -1:
+                list_to_append.append(hospital)
+        total_count = len(list_to_append)
+        if need_pagination:
+            pagination_start = (pagination_page_num - 1) * pagination_page_size
+            pagination_end = pagination_page_num * pagination_page_size
+            list_to_append = list_to_append[pagination_start:pagination_end]
+            response["totalPage"] = (total_count // pagination_page_size) + 1
+        response["data"] = list_to_append
+        response["count"] = len(response["data"])
+        response["success"] = True
+    except Exception as e:
+        print(e.with_traceback)
+        response = {
+            "data": [],
+            "count": -1,
+            "success": False,
+        }
+        return Response(response, status=500, mimetype='application/json')
+    return response
+
+
+@app.route('/query_hospital_department', methods=['GET'])
+def get_hospital_department_list_by_name():
+    response = {
+        "data": [],
+        "count": -1,
+        "success": False,
+        "totalPage": 1
+    }
+    need_pagination = False
+    pagination_page_size = -1
+    pagination_page_num = -1
+    query_dict = request.args
+    try:
+        pagination_page_size = int(query_dict["itemCountOnOnePage"])
+        pagination_page_num = int(query_dict["pageIndex"])
+        need_pagination = True
+    except KeyError:
+        pass
+    except ValueError:
+        # not an int
+        return Response(dict({
+            "msg": "Invaild pagination request."
+        }), status=400)
+    try:
+        list_to_append = []
+        hospital_name = request.args.get('hospital_name')
+        for hospital in mock_hospital_department_list["hospital_department_list"]:
             this_hospital_name: str
             this_hospital_name = hospital["hosName"]
             if this_hospital_name.find(hospital_name) != -1:
