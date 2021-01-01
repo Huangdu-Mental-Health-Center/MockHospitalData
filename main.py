@@ -7,6 +7,7 @@ from flask import Flask, request
 from gevent.pywsgi import WSGIServer
 import json
 from threading import Thread
+from flask import Response
 
 app = Flask(__name__)
 
@@ -67,13 +68,34 @@ def get_hospital_list_by_name():
         "count": -1,
         "success": False,
     }
+    need_pagination = False
+    pagination_page_size = -1
+    pagination_page_num = -1
+    query_dict = request.args
     try:
+        pagination_page_size = int(query_dict["itemCountOnOnePage"])
+        pagination_page_num = int(query_dict["pageIndex"])
+        need_pagination = True
+    except KeyError:
+        pass
+    except ValueError:
+        # not an int
+        return Response(dict({
+            "msg": "Invaild pagination request."
+        }), status=400)
+    try:
+        list_to_append = []
         hospital_name = request.args.get('hospital_name')
         for hospital in mock_hospital_list["hospital_list"]:
             this_hospital_name: str
             this_hospital_name = hospital["hosName"]
             if this_hospital_name.find(hospital_name) != -1:
-                response["data"].append(hospital)
+                list_to_append.append(hospital)
+        if need_pagination:
+            pagination_start = (pagination_page_num - 1) * pagination_page_size
+            pagination_end = pagination_page_num * pagination_page_size
+            list_to_append = list_to_append[pagination_start:pagination_end]
+        response["data"] = list_to_append
         response["count"] = len(response["data"])
         response["success"] = True
     except Exception as e:
@@ -83,6 +105,7 @@ def get_hospital_list_by_name():
             "count": -1,
             "success": False,
         }
+        return Response(response, status=500, mimetype='application/json')
     return response
 
 
