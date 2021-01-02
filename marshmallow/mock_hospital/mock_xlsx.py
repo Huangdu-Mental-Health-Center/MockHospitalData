@@ -10,7 +10,7 @@ df = pd.read_excel("./marshmallow/mock_hospital/assets/" + xlsx_name)
 df_all = df.to_dict('records')
 doctor_list_dict = []
 for doctor_tuple in df_all:
-    doctor_list_dict.append(Doctor(doctor_tuple).__dict__)
+    doctor_list_dict.append(Doctor(doctor_tuple, hospital_name, hospital_region).__dict__)
 hospital_all = Hospital(
     hospital_name,
     hospital_region,
@@ -26,7 +26,7 @@ def query(doctor_name: str) -> Hospital:
     doctor: Doctor
     for doctor in doctor_list_dict:
         if doctor["name"].find(doctor_name) != -1:
-            temp_doctor_list_dict.append(doctor)
+            temp_doctor_list_dict.append(doctor, hospital_name, hospital_region)
     hospital = Hospital(
         hospital_name,
         hospital_region,

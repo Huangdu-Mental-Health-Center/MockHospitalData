@@ -21,7 +21,9 @@ with open("./marshmallow/mock_hospital/assets/hospitals.json", encoding='utf8') 
     mock_hospital_list = json.loads(hospital_list_json.read())
 
 with open("./marshmallow/mock_hospital/assets/hospital_departments.json", encoding='utf8') as hospital_department_list_json:
-    mock_hospital_department_list = json.loads(hospital_department_list_json.read())
+    mock_hospital_department_list = json.loads(
+        hospital_department_list_json.read())
+
 
 @app.route('/query', methods=['GET'])
 def get_doctor_list_by_name():
@@ -29,29 +31,66 @@ def get_doctor_list_by_name():
         "data": [],
         "count": -1,
         "success": False,
+        "totalPage": 1
     }
+    need_pagination = False
+    pagination_page_size = -1
+    pagination_page_num = -1
+    query_dict = request.args
+    try:
+        pagination_page_size = int(query_dict["itemCountOnOnePage"])
+        pagination_page_num = int(query_dict["pageIndex"])
+        need_pagination = True
+    except KeyError:
+        pass
+    except ValueError:
+        # not an int
+        return Response(dict({
+            "msg": "Invaild pagination request."
+        }), status=400)
     try:
         doctor_name = request.args.get('doctor_name')
-        result_list = []
-        xlsx_dict = mock_xlsx.query(doctor_name).__dict__
-        db_dict = mock_db.query(doctor_name).__dict__
-        api_resp = requests.get(
-            "http://127.0.0.1:15000/query?doctor_name=" + doctor_name)
-        api_dict = json.loads(api_resp.text)
-        print(xlsx_dict)
-        print(api_dict)
-        print(db_dict)
-        result_list.append(xlsx_dict)
-        result_list.append(api_dict)
-        result_list.append(db_dict)
+        doctor_name_filter_enabled = True if doctor_name else False
+        department_name = request.args.get('department_name')
+        department_name_filter_enabled = True if department_name else False
+        hospital_name = request.args.get('hospital_name')
+        hospital_name_filter_enabled = True if hospital_name else False
 
-        for i in result_list:
-            if len(i["doctor_list_dict_str"]) != 0:
-                response["data"].append(i)
-        temp_count = 0
-        for i in response["data"]:
-            temp_count += len(i["doctor_list_dict_str"])
-        response["count"] = temp_count
+        result_list = []
+        xlsx_dict = mock_xlsx.get_all().__dict__
+        db_dict = mock_db.get_all().__dict__
+        api_resp = requests.get(
+            "http://127.0.0.1:15000/get_all")
+        api_dict = json.loads(api_resp.text)
+        all_result = xlsx_dict["doctor_list_dict_str"] + \
+            api_dict["doctor_list_dict_str"] + db_dict["doctor_list_dict_str"]
+        result_list = all_result
+        if doctor_name_filter_enabled:
+            temp_list = []
+            for doctor in result_list:
+                if doctor["name"].find(doctor_name) != -1:
+                    temp_list.append(doctor)
+            result_list = temp_list
+        if department_name_filter_enabled:
+            temp_list = []
+            for doctor in result_list:
+                if doctor["department"] == department_name:
+                    temp_list.append(doctor)
+            result_list = temp_list
+        if hospital_name_filter_enabled:
+            temp_list = []
+            for doctor in result_list:
+                if doctor["hospital_name"] == hospital_name:
+                    temp_list.append(doctor)
+            result_list = temp_list
+        total_count = len(result_list)
+        if need_pagination:
+            pagination_start = (pagination_page_num - 1) * pagination_page_size
+            pagination_end = pagination_page_num * pagination_page_size
+            result_list = result_list[pagination_start:pagination_end]
+            response["totalPage"] = (total_count // pagination_page_size) + 1
+        response["data"] = result_list
+        response["count"] = len(result_list)
         response["success"] = True
     except Exception as e:
         print(e.with_traceback)

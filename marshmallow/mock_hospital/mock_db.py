@@ -12,7 +12,7 @@ result = c.fetchall()
 conn.close()
 doctor_list_dict = []
 for doctor_tuple in result:
-    doctor_list_dict.append(Doctor(doctor_tuple).__dict__)
+    doctor_list_dict.append(Doctor(doctor_tuple, hospital_name, hospital_region).__dict__)
 hospital_all = Hospital(
     hospital_name,
     hospital_region,
@@ -28,7 +28,7 @@ def query(doctor_name: str) -> Hospital:
     conn.close()
     doctor_list_dict = []
     for doctor_tuple in result:
-        doctor_list_dict.append(Doctor(doctor_tuple).__dict__)
+        doctor_list_dict.append(Doctor(doctor_tuple, hospital_name, hospital_region).__dict__)
     hospital = Hospital(
         hospital_name,
         hospital_region,
