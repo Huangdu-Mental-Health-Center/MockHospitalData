@@ -55,6 +55,8 @@ def get_doctor_list_by_name():
         department_name_filter_enabled = True if department_name else False
         hospital_name = request.args.get('hospital_name')
         hospital_name_filter_enabled = True if hospital_name else False
+        region_name = request.args.get('region_name')
+        region_name_filter_enabled = True if region_name else False
 
         result_list = []
         xlsx_dict = mock_xlsx.get_all().__dict__
@@ -81,6 +83,12 @@ def get_doctor_list_by_name():
             temp_list = []
             for doctor in result_list:
                 if doctor["hospital_name"] == hospital_name:
+                    temp_list.append(doctor)
+            result_list = temp_list
+        if region_name_filter_enabled:
+            temp_list = []
+            for doctor in result_list:
+                if doctor["hospital_region"] == region_name:
                     temp_list.append(doctor)
             result_list = temp_list
         total_count = len(result_list)
