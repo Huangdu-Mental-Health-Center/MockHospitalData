@@ -10,7 +10,8 @@ with open("./marshmallow/mock_hospital/assets/hospital_api.json", encoding='utf8
     mock_hospital_data: dict
     doctor: dict
     for doctor in mock_hospital_data["data"]:
-        doctor_list_dict.append(Doctor(doctor).__dict__)
+        doctor_list_dict.append(Doctor(
+            doctor, mock_hospital_data["hospital_name"], mock_hospital_data["hospital_region"]).__dict__)
     hospital_all = Hospital(
         mock_hospital_data["hospital_name"],
         mock_hospital_data["hospital_region"],
@@ -27,7 +28,8 @@ def get_doctor_list():
         this_doctor_name: str
         this_doctor_name = doctor["name"]
         if this_doctor_name.find(doctor_name) != -1:
-            return_dict_list.append(Doctor(doctor).__dict__)
+            return_dict_list.append(Doctor(
+                doctor, mock_hospital_data["hospital_name"], mock_hospital_data["hospital_region"]).__dict__)
     hospital = Hospital(mock_hospital_data["hospital_name"],
                         mock_hospital_data["hospital_region"], return_dict_list)
     return hospital.__dict__
