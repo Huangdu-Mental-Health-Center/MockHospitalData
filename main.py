@@ -8,6 +8,7 @@ from gevent.pywsgi import WSGIServer
 import json
 from threading import Thread
 from flask import Response
+import math
 
 app = Flask(__name__)
 
@@ -96,7 +97,7 @@ def get_doctor_list_by_name():
             pagination_start = (pagination_page_num - 1) * pagination_page_size
             pagination_end = pagination_page_num * pagination_page_size
             result_list = result_list[pagination_start:pagination_end]
-            response["totalPage"] = (total_count // pagination_page_size) + 1
+            response["totalPage"] = math.ceil(total_count // pagination_page_size)
         response["data"] = result_list
         response["count"] = total_count
         response["success"] = True
@@ -146,7 +147,7 @@ def get_hospital_list_by_name():
             pagination_start = (pagination_page_num - 1) * pagination_page_size
             pagination_end = pagination_page_num * pagination_page_size
             list_to_append = list_to_append[pagination_start:pagination_end]
-            response["totalPage"] = (total_count // pagination_page_size) + 1
+            response["totalPage"] = math.ceil(total_count // pagination_page_size)
         response["data"] = list_to_append
         response["count"] = total_count
         response["success"] = True
@@ -197,7 +198,7 @@ def get_hospital_department_list_by_name():
             pagination_start = (pagination_page_num - 1) * pagination_page_size
             pagination_end = pagination_page_num * pagination_page_size
             list_to_append = list_to_append[pagination_start:pagination_end]
-            response["totalPage"] = (total_count // pagination_page_size) + 1
+            response["totalPage"] = math.ceil(total_count // pagination_page_size)
         response["data"] = list_to_append
         response["count"] = total_count
         response["success"] = True
