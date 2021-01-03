@@ -98,7 +98,7 @@ def get_doctor_list_by_name():
             result_list = result_list[pagination_start:pagination_end]
             response["totalPage"] = (total_count // pagination_page_size) + 1
         response["data"] = result_list
-        response["count"] = len(result_list)
+        response["count"] = total_count
         response["success"] = True
     except Exception as e:
         print(e.with_traceback)
@@ -148,7 +148,7 @@ def get_hospital_list_by_name():
             list_to_append = list_to_append[pagination_start:pagination_end]
             response["totalPage"] = (total_count // pagination_page_size) + 1
         response["data"] = list_to_append
-        response["count"] = len(response["data"])
+        response["count"] = total_count
         response["success"] = True
     except Exception as e:
         print(e.with_traceback)
@@ -199,7 +199,7 @@ def get_hospital_department_list_by_name():
             list_to_append = list_to_append[pagination_start:pagination_end]
             response["totalPage"] = (total_count // pagination_page_size) + 1
         response["data"] = list_to_append
-        response["count"] = len(response["data"])
+        response["count"] = total_count
         response["success"] = True
     except Exception as e:
         print(e.with_traceback)
