@@ -5,7 +5,7 @@ import unittest
 # from marshmallow.mock_hospital.mock_api import get_doctor_list as api_query
 
 
-class Test_testQuerytest(unittest.TestCase):
+class TestQuery(unittest.TestCase):
 
     def test_db_single_query_if_success(self):
         from marshmallow.mock_hospital.mock_db import query as db_query
