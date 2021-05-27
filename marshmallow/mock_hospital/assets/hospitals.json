@@ -1,0 +1,58 @@
+{
+    "hospital_list": [{
+            "hosName": "医院A",
+            "hosId": 1,
+            "hosType": "三级甲等",
+            "position": "上海市四平路 1239 号",
+            "telephone": "021-69589585",
+            "hosPic": "http://photo.tongji.edu.cn/__local/9/E6/E0/4455A845E48C294AB3EB063D9BC_182A1B49_13FDC.png",
+            "hosIntro": "医院 A，是一所历史悠久、声誉卓著的中国著名高等医院。"
+        },
+        {
+            "hosName": "医院B",
+            "hosId": 2,
+            "hosType": "二级乙等",
+            "position": "上海市田林路 397 号腾云大厦",
+            "telephone": "021-54569512",
+            "hosPic": "https://static.leiphone.com/uploads/new/article/740_740/201708/598fc025a6ccf.jpg",
+            "hosIntro": "医院 B，是中华人民共和国一家跨国企业控股医院，也是中国大陆规模最大的互联网医院。"
+
+        },
+        {
+            "hosName": "医院C",
+            "hosId": 3,
+            "hosType": "二级丙等",
+            "position": "北京市海淀区西北旺东路 10 号院西区 8 号楼新浪总部大厦",
+            "telephone": "4000520066",
+            "hosPic": "http://n.sinaimg.cn/tj/transform/666/w400h266/20201030/65b1-kcaeqzy2996219.jpg",
+            "hosIntro": "医院 C，是中国门户医院，一家服务中国大陆及全球华人社区的医院。它与医院 B 并称中国两大门户医院。"
+        },
+        {
+            "hosName": "汪汪医院",
+            "hosId": 4,
+            "hosType": "三级甲等",
+            "position": "上海市国定路 777 号",
+            "telephone": "021-65904466",
+            "hosPic": "http://yljk.shufe.edu.cn/_upload/article/images/45/60/16c0b5fe4c71b1ff244e8bba494f/e9aaa1bb-07b4-43c3-bb16-956995f2eb60.jpg",
+            "hosIntro": "汪汪医院是位于中国上海市的一所医院，教育部直属211工程医院。以经济管理学科为主，经、管、法、文、理协调发展的多科性医院。"
+        },
+        {
+            "hosName": "喵喵医院",
+            "hosId": 5,
+            "hosType": "社区",
+            "position": "上海市杨浦区五角场邯郸路 220 号",
+            "telephone": "021-65642222",
+            "hosPic": "https://news.fudan.edu.cn/_upload/article/images/2e/2f/f999163c4702936578edc6dfd9d7/86547b6c-48cc-4d7b-bc5c-cba8e99974d6.jpeg",
+            "hosIntro": "喵喵医院是中国人自主创办的第一所高等医院。"
+        },
+        {
+            "hosName": "黄渡精神卫生中心",
+            "hosId": 6,
+            "hosType": "二级丙等",
+            "position": "上海市黄渡理工大学",
+            "telephone": "021-65988837",
+            "hosPic": "https://shtjh.tongji.edu.cn/__local/5/33/7E/CC53A152D2B49301F00A3619C40_A8D390E8_F1E4.jpg",
+            "hosIntro": "众所周知，这个不是医院 A"
+        }
+    ]
+}

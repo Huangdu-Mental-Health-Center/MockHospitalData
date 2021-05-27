@@ -1,7 +1,6 @@
 # self-defined ignores starts here
 .vscode/
 
-marshmallow/mock_hospital/assets/
 marshmallow/mock_hospital/tool/
 
 # Byte-compiled / optimized / DLL files
