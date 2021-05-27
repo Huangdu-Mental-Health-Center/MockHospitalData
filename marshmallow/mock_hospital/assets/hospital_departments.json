@@ -1,0 +1,185 @@
+{
+    "hospital_department_list": [{
+            "hosId": 1,
+            "hosName": "医院A",
+            "hosIntro": "医院 A，是一所历史悠久、声誉卓著的中国著名高等医院。",
+            "count": 5,
+            "departmentList": [{
+                    "deptId": 1,
+                    "deptName": "超声诊断科",
+                    "deptList": [{
+                        "deptSecId": 1,
+                        "deptName": "超声诊断科"
+                    }]
+                },
+                {
+                    "deptId": 2,
+                    "deptName": "心血管科",
+                    "deptList": [{
+                            "deptSecId": 2,
+                            "deptName": "心血管内科"
+                        },
+                        {
+                            "deptSecId": 3,
+                            "deptName": "心血管外科"
+                        }
+                    ]
+                },
+                {
+                    "deptId": 3,
+                    "deptName": "神经科",
+                    "deptList": [{
+                            "deptSecId": 4,
+                            "deptName": "神经内科"
+                        },
+                        {
+                            "deptSecId": 5,
+                            "deptName": "神经外科"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "hosId": 2,
+            "hosName": "医院B",
+            "hosIntro": "医院 B，是中华人民共和国一家跨国企业控股医院，也是中国大陆规模最大的互联网医院。",
+            "count": 5,
+            "departmentList": [{
+                    "deptId": 1,
+                    "deptName": "血液科",
+                    "deptList": [{
+                        "deptSecId": 1,
+                        "deptName": "血液内科"
+                    }]
+                },
+                {
+                    "deptId": 2,
+                    "deptName": "皮肤科",
+                    "deptList": [{
+                        "deptSecId": 2,
+                        "deptName": "皮肤科"
+                    }]
+                },
+                {
+                    "deptId": 3,
+                    "deptName": "神经科",
+                    "deptList": [{
+                        "deptSecId": 5,
+                        "deptName": "神经外科"
+                    }]
+                },
+                {
+                    "deptId": 4,
+                    "deptName": "肝胆胰脾肾",
+                    "deptList": [{
+                            "deptSecId": 4,
+                            "deptName": "泌尿外科"
+                        },
+                        {
+                            "deptSecId": 5,
+                            "deptName": "肝胆外科"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "hosId": 3,
+            "hosName": "医院C",
+            "hosIntro": "医院 C，是中国门户医院，一家服务中国大陆及全球华人社区的医院。它与医院 B 并称中国两大门户医院。",
+            "count": 6,
+            "departmentList": [{
+                    "deptId": 1,
+                    "deptName": "儿科",
+                    "deptList": [{
+                        "deptSecId": 1,
+                        "deptName": "儿科"
+                    }]
+                },
+                {
+                    "deptId": 2,
+                    "deptName": "妇产科",
+                    "deptList": [{
+                        "deptSecId": 2,
+                        "deptName": "妇科"
+                    }]
+                },
+                {
+                    "deptId": 3,
+                    "deptName": "呼吸科",
+                    "deptList": [{
+                        "deptSecId": 3,
+                        "deptName": "呼吸内科"
+                    }]
+                },
+                {
+                    "deptId": 4,
+                    "deptName": "口腔科",
+                    "deptList": [{
+                        "deptSecId": 4,
+                        "deptName": "口腔科"
+                    }]
+                },
+                {
+                    "deptId": 5,
+                    "deptName": "胸外科",
+                    "deptList": [{
+                        "deptSecId": 5,
+                        "deptName": "胸外科"
+                    }]
+                },
+                {
+                    "deptId": 6,
+                    "deptName": "神经科",
+                    "deptList": [{
+                        "deptSecId": 6,
+                        "deptName": "神经内科"
+                    }]
+                }
+            ]
+        },
+        {
+            "hosId": 4,
+            "hosName": "汪汪医院",
+            "hosIntro": "汪汪医院是位于中国上海市的一所医院，教育部直属211工程医院。以经济管理学科为主，经、管、法、文、理协调发展的多科性医院。",
+            "count": 1,
+            "departmentList": [{
+                "deptId": 1,
+                "deptName": "没有科室",
+                "deptList": [{
+                    "deptSecId": 1,
+                    "deptName": "没有科室"
+                }]
+            }]
+        },
+        {
+            "hosId": 5,
+            "hosName": "喵喵医院",
+            "hosIntro": "喵喵医院是中国人自主创办的第一所高等医院。",
+            "count": 1,
+            "departmentList": [{
+                "deptId": 1,
+                "deptName": "没有科室",
+                "deptList": [{
+                    "deptSecId": 1,
+                    "deptName": "没有科室"
+                }]
+            }]
+        },
+        {
+            "hosId": 6,
+            "hosName": "黄渡精神卫生中心",
+            "hosIntro": "众所周知，这个不是医院 A",
+            "count": 1,
+            "departmentList": [{
+                "deptId": 1,
+                "deptName": "没有科室",
+                "deptList": [{
+                    "deptSecId": 1,
+                    "deptName": "没有科室"
+                }]
+            }]
+        }
+    ]
+}

@@ -19,10 +19,7 @@ with open("./marshmallow/mock_hospital/assets/hospital_api.json", encoding='utf8
 
 app = Flask(__name__)
 
-
-@app.route('/query', methods=['GET'])
-def get_doctor_list():
-    doctor_name = request.args.get('doctor_name')
+def query(doctor_name: str) -> Hospital:
     return_dict_list = []
     for doctor in mock_hospital_data["data"]:
         this_doctor_name: str
@@ -32,6 +29,12 @@ def get_doctor_list():
                 doctor, mock_hospital_data["hospital_name"], mock_hospital_data["hospital_region"]).__dict__)
     hospital = Hospital(mock_hospital_data["hospital_name"],
                         mock_hospital_data["hospital_region"], return_dict_list)
+    return hospital
+
+@app.route('/query', methods=['GET'])
+def get_doctor_list():
+    doctor_name = request.args.get('doctor_name')
+    hospital = query(doctor_name)
     return hospital.__dict__
 
 
